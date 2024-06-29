@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   everydream2trainer:
-    image: ghcr.io/victorchall/everydream2trainer:nightly
+    image: ghcr.io/victorchall/everydream2trainer:main
     ports:
       - "8888:8888"
       - "6006:6006"
