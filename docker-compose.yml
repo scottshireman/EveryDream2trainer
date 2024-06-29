@@ -3,8 +3,8 @@ services:
   everydream2trainer:
     image: ghcr.io/victorchall/everydream2trainer:nightly
     ports:
-      - "127.0.0.1:8888:8888"
-      - "127.0.0.1:6006:6006"
+      - "8888:8888"
+      - "6006:6006"
     environment:
       - JUPYTER_PASSWORD=test1234
     volumes:
