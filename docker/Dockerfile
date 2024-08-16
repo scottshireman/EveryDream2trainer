@@ -65,9 +65,9 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 
 # Install runpodctl
-RUN wget https://github.com/runpod/runpodctl/releases/download/v1.14.3/runpodctl-linux-amd64 -O runpodctl && \
-    chmod a+x runpodctl && \
-    mv runpodctl /usr/local/bin
+#RUN wget https://github.com/runpod/runpodctl/releases/download/v1.14.3/runpodctl-linux-amd64 -O runpodctl && \
+#    chmod a+x runpodctl && \
+#    mv runpodctl /usr/local/bin
 
 ENV VIRTUAL_ENV=/workspace/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
@@ -90,7 +90,7 @@ RUN pip install --no-cache-dir -r requirements-runtime.txt
 
 WORKDIR /workspace
 ARG CACHEBUST=1
-RUN git clone https://github.com/victorchall/EveryDream2trainer
+RUN git clone https://github.com/scottshireman/EveryDream2trainer
 
 WORKDIR /workspace/EveryDream2trainer
 
