@@ -9,6 +9,7 @@ ipywidgets
 jupyter-archive
 jupyterlab
 lion-pytorch
+nodejs
 piexif==1.1.3
 pyfakefs
 pynvml==11.5.0
