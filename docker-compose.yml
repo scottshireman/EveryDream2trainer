@@ -1,19 +1,26 @@
 version: '3.8'
 services:
   everydream2trainer:
-    image: ghcr.io/victorchall/everydream2trainer:main
+    container_name: everydream2-gpu0
+    shm_size: '2gb'
+    image: https://github.com/scottshireman/EveryDream2trainer
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
     ports:
       - "8888:8888"
       - "6006:6006"
     environment:
       - JUPYTER_PASSWORD=test1234
-    volumes:
-      - .:/workspace/EveryDream2trainer
-      - ./.cache:/root/.cache
-    deploy:
+    volumes:  
+      - /home/scott/everydream2-gpu0:/workspace/EveryDream2trainer
+      - /home/scott/everydream2-gpu0/.cache:/root/.cache
+      - /media/data/runtime:/workspace/EveryDream2trainer/runtime
+      - /media/data/models:/workspace/EveryDream2trainer/models:ro
+      - /media/data/captions:/workspace/EveryDream2trainer/captions:ro
+    deploy:   
       resources:
         reservations:
           devices:
             - driver: nvidia
-              count: all
+              device_ids: ['0']
               capabilities: [gpu]
