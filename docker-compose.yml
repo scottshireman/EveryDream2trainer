@@ -3,7 +3,7 @@ services:
   everydream2trainer:
     container_name: everydream2-gpu0
     shm_size: '2gb'
-    image: https://github.com/scottshireman/EveryDream2trainer
+    image: https://github.com/scottshireman/everydream2trainer
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     ports:
