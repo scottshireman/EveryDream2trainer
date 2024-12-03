@@ -26,7 +26,7 @@ if [[ $JUPYTER_PASSWORD ]]
 then
 #    jupyter nbextension enable --py widgetsnbextension
     jupyter labextension disable "@jupyterlab/apputils-extension:announcements"
-    jupyter lab --allow-root --no-browser --port=8888 --ip=* --ServerApp.terminado_settings='{"shell_command":["/bin/bash"]}' --ServerApp.token=$JUPYTER_PASSWORD --ServerApp.allow_origin=* --ServerApp.preferred_dir=/workspace/EveryDream2trainer
+    jupyter lab --allow-root --no-browser --port=8888 --ip=*  --ServerApp.iopub_msg_rate_limit=10000 --ServerApp.rate_limit_window=3.0 --ServerApp.terminado_settings='{"shell_command":["/bin/bash"]}' --ServerApp.token=$JUPYTER_PASSWORD --ServerApp.allow_origin=* --ServerApp.preferred_dir=/workspace/EveryDream2trainer
 else
     echo "Container Started"
     sleep infinity
