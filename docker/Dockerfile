@@ -1,6 +1,6 @@
 ###################
 # Builder Stage
-FROM nvidia/cuda:12.1.0-devel-ubuntu22.04 AS builder
+FROM nvidia/cuda:12.8.0-devel-ubuntu22.04 AS builder
 LABEL org.opencontainers.image.licenses="AGPL-3.0-only"
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -32,13 +32,21 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ADD requirements-build.txt /build
 RUN --mount=type=cache,target=/root/.cache/pip \
     python3 -m venv ${VIRTUAL_ENV} && \
-    pip install -U -I torch==2.1.0+cu121 torchvision==0.16.0+cu121 --extra-index-url "https://download.pytorch.org/whl/cu121" && \
+    # pip install -U -I torch==2.1.0+cu121 torchvision==0.16.0+cu121 --extra-index-url "https://download.pytorch.org/whl/cu121" && \
+    pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128 && \
     pip install -r requirements-build.txt && \
     pip install --no-deps xformers==0.0.22.post7
 
+RUN --mount=type=cache,target=/root/.cache/pip \
+    python3 -m venv ${VIRTUAL_ENV} && \
+    pip install --upgrade pip && \
+    pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128 && \
+    pip install -r requirements-build.txt && \
+    pip install --no-deps --no-build-isolation xformers
+
 ###################
 # Runtime Stage
-FROM nvidia/cuda:12.1.0-runtime-ubuntu22.04 as runtime
+FROM nvidia/cuda:12.8.0-runtime-ubuntu22.04 as runtime
 
 # Use bash shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
