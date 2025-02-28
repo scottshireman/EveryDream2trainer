@@ -78,6 +78,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 ENV VIRTUAL_ENV=/workspace/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+RUN ${VIRTUAL_ENV}/bin/python -m ensurepip
 RUN echo "source ${VIRTUAL_ENV}/bin/activate" >> /root/.bashrc
 
 # Workaround for:
