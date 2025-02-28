@@ -1,7 +1,6 @@
 ###################
 # Builder Stage
-#FROM nvidia/cuda:12.8.0-devel-ubuntu22.04 AS builder
-FROM nvcr.io/nvidia/pytorch:25.01-py3 AS builder
+FROM nvidia/cuda:12.8.0-devel-ubuntu22.04 AS builder
 LABEL org.opencontainers.image.licenses="AGPL-3.0-only"
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -33,7 +32,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ADD requirements-build.txt /build
 RUN --mount=type=cache,target=/root/.cache/pip \
     python3 -m venv ${VIRTUAL_ENV} && \
-#    pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128 && \
+    pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128 && \
     pip install -r requirements-build.txt
 
 # Clone xformers and compile it from source
@@ -44,8 +43,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 ###################
 # Runtime Stage
-#FROM nvidia/cuda:12.8.0-runtime-ubuntu22.04 as runtime
-FROM nvcr.io/nvidia/pytorch:25.01-py3 AS runtime
+FROM nvidia/cuda:12.8.0-runtime-ubuntu22.04 as runtime
 
 # Use bash shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -79,7 +77,6 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 ENV VIRTUAL_ENV=/workspace/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
-RUN ${VIRTUAL_ENV}/bin/python -m ensurepip
 RUN echo "source ${VIRTUAL_ENV}/bin/activate" >> /root/.bashrc
 
 # Workaround for:
