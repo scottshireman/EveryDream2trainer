@@ -59,7 +59,7 @@ ENV PYTHONUNBUFFERED=1
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt update && apt install -y --no-install-recommends \
-        wget bash curl git git-lfs vim tmux \
+        wget bash curl git git-lfs vim tmux nano \
         build-essential lsb-release \
         python3-pip python3-venv python3-dev \
         openssh-server \
