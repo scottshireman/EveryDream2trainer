@@ -64,7 +64,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt update && apt install -y --no-install-recommends \
         wget bash curl git git-lfs vim tmux \
         build-essential lsb-release \
-        python3-pip python3-venv \
+        python3-pip python3-venv python3-dev \
         openssh-server \
         gnupg ca-certificates && \
     update-ca-certificates && \
