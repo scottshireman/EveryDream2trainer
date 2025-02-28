@@ -32,22 +32,14 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ADD requirements-build.txt /build
 RUN --mount=type=cache,target=/root/.cache/pip \
     python3 -m venv ${VIRTUAL_ENV} && \
-    # pip install -U -I torch==2.1.0+cu121 torchvision==0.16.0+cu121 --extra-index-url "https://download.pytorch.org/whl/cu121" && \
     pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128 && \
     pip install -r requirements-build.txt
 
 # Clone xformers and compile it from source
-RUN git clone --recursive https://github.com/facebookresearch/xformers.git /xformers && \
-    cd /xformers && \
-    pip install -r requirements.txt && \
-    python setup.py install
-
-RUN --mount=type=cache,target=/root/.cache/pip \
-    python3 -m venv ${VIRTUAL_ENV} && \
-    pip install --upgrade pip && \
-    pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128 && \
-    pip install -r requirements-build.txt && \
-    pip install --no-deps --no-build-isolation xformers
+#RUN git clone --recursive https://github.com/facebookresearch/xformers.git /xformers && \
+#    cd /xformers && \
+#    pip install -r requirements.txt && \
+#    python setup.py install
 
 ###################
 # Runtime Stage
