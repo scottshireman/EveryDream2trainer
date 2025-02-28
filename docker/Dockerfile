@@ -44,7 +44,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 ###################
 # Runtime Stage
-FROM nvidia/cuda:12.8.0-runtime-ubuntu22.04 as runtime
+#FROM nvidia/cuda:12.8.0-runtime-ubuntu22.04 as runtime
+FROM nvcr.io/nvidia/pytorch:25.01-py3 AS runtime
 
 # Use bash shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
