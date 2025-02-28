@@ -91,8 +91,8 @@ RUN echo "source ${VIRTUAL_ENV}/bin/activate" >> /root/.bashrc
 # Exporting anything with an _ should cover the bases
 RUN env | grep _ >> /etc/environment;
 
-ADD requirements-runtime.txt /
-RUN pip install --no-cache-dir -r requirements-runtime.txt
+#ADD requirements-runtime.txt /
+#RUN pip install --no-cache-dir -r requirements-runtime.txt
 
 WORKDIR /workspace
 ARG CACHEBUST=1
