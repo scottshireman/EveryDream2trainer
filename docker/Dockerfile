@@ -1,6 +1,7 @@
 ###################
 # Builder Stage
-FROM nvidia/cuda:12.8.0-devel-ubuntu22.04 AS builder
+#FROM nvidia/cuda:12.8.0-devel-ubuntu22.04 AS builder
+FROM nvcr.io/nvidia/pytorch:25.01-py3 AS builder
 LABEL org.opencontainers.image.licenses="AGPL-3.0-only"
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -32,7 +33,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ADD requirements-build.txt /build
 RUN --mount=type=cache,target=/root/.cache/pip \
     python3 -m venv ${VIRTUAL_ENV} && \
-    pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128 && \
+#    pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128 && \
     pip install -r requirements-build.txt
 
 # Clone xformers and compile it from source
