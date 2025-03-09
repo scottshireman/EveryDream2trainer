@@ -78,7 +78,7 @@ class ImageConfig:
     def from_dict(cls, data: dict):
         # Parse standard yaml tag file (with options)
         parsed_cfg = ImageConfig(
-            image_path = data.get("image")
+            image_path = data.get("image"),
             main_prompts=safe_set(data.get("main_prompt")), 
             rating=data.get("rating"), 
             max_caption_length=data.get("max_caption_length"), 
