@@ -266,7 +266,7 @@ class Dataset:
                     image=None,
                     caption=caption,
                     aspects=aspects,
-                    pathname=os.path.abspath(config.image_path),
+                    pathname=os.path.abspath(config.image_path) if config.image_path else os.path.abspath(image),
                     flip_p=config.flip_p or 0.0,
                     multiplier=config.multiply or 1.0,
                     cond_dropout=config.cond_dropout,
