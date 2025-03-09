@@ -277,6 +277,6 @@ class Dataset:
                 )
                 items.append(item)
             except Exception as e:
-                logging.error(f" *** Error preloading image or caption for: {config.image_path}}, error: {e}")
+                logging.error(f" *** Error preloading image or caption for: {config.image_path}, error: {e}")
                 raise e
         return items
