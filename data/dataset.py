@@ -78,6 +78,7 @@ class ImageConfig:
     def from_dict(cls, data: dict):
         # Parse standard yaml tag file (with options)
         parsed_cfg = ImageConfig(
+            image_path = data.get("image")
             main_prompts=safe_set(data.get("main_prompt")), 
             rating=data.get("rating"), 
             max_caption_length=data.get("max_caption_length"), 
@@ -227,9 +228,7 @@ class Dataset:
             for img_no, data in enumerate(json.load(stream)):
                 img = data.get("image")
                 cfg = Dataset.__ensure_caption(ImageConfig.parse(data), img)
-                if img:
-                    cfg['image_path'] = img
-                else:
+                if not img:
                     logging.warning(f" *** Error parsing json image entry in {json_path}: {data}")
                     continue
                 image_configs[img_no] = cfg
