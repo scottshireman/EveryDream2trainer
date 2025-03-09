@@ -245,7 +245,7 @@ class Dataset:
                 logging.warning(f" *** Found multiple multiple main_prompts for image {config.image_path}, but only one will be applied: {config.main_prompts}")
 
             if len(config.main_prompts) < 1:
-                logging.warning(f" *** No main_prompts for image {config.image_path}}")
+                logging.warning(f" *** No main_prompts for image {config.image_path}")
 
             tags = []
             tag_weights = []
