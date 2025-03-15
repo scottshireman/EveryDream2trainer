@@ -239,6 +239,7 @@ def setup_local_logger(args):
                         datefmt="%m/%d/%Y %I:%M:%S %p",
                        )
     console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setLevel(logging.WARNING)  # Added on 3/15 to suppress info messages to console
     console_handler.addFilter(lambda msg: "Palette images with Transparency expressed in bytes" not in msg.getMessage())
     logging.getLogger().addHandler(console_handler)
     import warnings
