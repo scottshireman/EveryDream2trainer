@@ -32,7 +32,8 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ADD requirements-build.txt /build
 RUN --mount=type=cache,target=/root/.cache/pip \
     python3 -m venv ${VIRTUAL_ENV} && \
-    pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128 && \
+    # pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128 && \
+    pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/cu128 && \
     pip install -r requirements-build.txt
 
 # Clone xformers and compile it from source
