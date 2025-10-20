@@ -1,4 +1,4 @@
-diffusers[torch]>=0.27.2
+diffusers[torch]==0.28.*
 ninja
 numpy==1.26.4
 omegaconf==2.2.3
