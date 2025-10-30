@@ -22,3 +22,4 @@ torchsde
 peft==0.9.0
 unidecode
 tiktoken
+huggingface_hub==0.23.2
