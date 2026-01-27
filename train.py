@@ -757,7 +757,12 @@ def main(args):
             optimizer_config = json.load(f)
 
     if args.wandb:
-        wandb.tensorboard.patch(root_logdir=log_folder, pytorch=False, tensorboard_x=False, save=False)
+        try:
+            wandb.tensorboard.patch(root_logdir=log_folder, pytorch=False, tensorboard_x=False, save=False)
+        except Exception as err:
+            print(err)
+            print("Continuing")
+            
         wandb_run = wandb.init(
             project=args.project_name,
             config={"main_cfg": vars(args), "optimizer_cfg": optimizer_config},
