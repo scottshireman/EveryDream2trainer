@@ -1387,6 +1387,8 @@ def main(args):
     gc.collect()
     torch.cuda.empty_cache()
 
+    return True
+
 
 def parse_train_args(argv=None):
     supported_resolutions = aspects.get_supported_resolutions()
