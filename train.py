@@ -549,6 +549,7 @@ def compute_snr(timesteps, noise_scheduler):
         snr[snr == 0] = minimal_value
     return snr
 
+"""
 def load_train_json_from_file(args, report_load = False):
     try:
         if report_load:
@@ -560,6 +561,16 @@ def load_train_json_from_file(args, report_load = False):
         args.__dict__.update(read_json)
     except Exception as config_read:
         print(f"Error on loading training config from {args.config}.")
+"""
+def load_train_json_from_file(args, report_load=False):
+    if report_load:
+        print(f"Loading training config from {args.config}.")
+
+    with open(args.config, "rt") as f:
+        read_json = json.load(f)
+
+    args.__dict__.update(read_json)
+    
 
 def main(args):
     """
