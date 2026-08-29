@@ -565,6 +565,10 @@ def main(args):
     """
     Main entry point
     """
+    log_writer = None
+    epoch_pbar = None
+    steps_pbar = None
+    
     if os.name == 'nt':
         print(" * Windows detected, disabling Triton")
         os.environ['XFORMERS_FORCE_DISABLE_TRITON'] = "1"
@@ -1356,9 +1360,21 @@ def main(args):
     logging.info(f"{Fore.LIGHTWHITE_EX} ***************************{Style.RESET_ALL}")
     logging.info(f"{Fore.LIGHTWHITE_EX} **** Finished training ****{Style.RESET_ALL}")
     logging.info(f"{Fore.LIGHTWHITE_EX} ***************************{Style.RESET_ALL}")
-    log_writer.close()
+    
+    if steps_pbar is not None:
+        steps_pbar.close()
+
+    if epoch_pbar is not None:
+        epoch_pbar.close()
+
+    if log_writer is not None:
+        log_writer.close()
+
     if args.wandb:
         wandb.finish()
+
+    gc.collect()
+    torch.cuda.empty_cache()
 
 if __name__ == "__main__":
     check_git()
