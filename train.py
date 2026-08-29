@@ -1381,7 +1381,7 @@ def parse_train_args(argv=None):
     supported_resolutions = aspects.get_supported_resolutions()
     argparser = argparse.ArgumentParser(description="EveryDream2 Training options")
     argparser.add_argument("--config", type=str, required=False, default=None, help="JSON config file to load options from")
-    args, argv = argparser.parse_known_args()
+    args, remaining_argv = argparser.parse_known_args(argv)
 
     load_train_json_from_file(args, report_load=True)
 
