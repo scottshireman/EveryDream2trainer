@@ -847,7 +847,9 @@ def main(args):
                                        text_encoder,
                                        unet,
                                        epoch_len,
-                                       log_writer)
+                                       log_writer,
+                                       quiet_mode=args.quiet_mode
+                                      )
 
     log_args(log_writer, args, optimizer_config, log_folder, log_time)
 
