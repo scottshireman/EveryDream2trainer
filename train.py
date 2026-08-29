@@ -570,8 +570,9 @@ def main(args):
 
     log_time, log_folder = setup_local_logger(args)
     args = setup_args(args)
-    print(f" Args:")
-    pprint.pprint(vars(args))
+    if not args.get('quiet_mode'):
+        print(f" Args:")
+        pprint.pprint(vars(args))
 
     if args.seed == -1:
         args.seed = random.randint(0, 2**30)
