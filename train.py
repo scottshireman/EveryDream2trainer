@@ -1376,8 +1376,8 @@ def main(args):
     gc.collect()
     torch.cuda.empty_cache()
 
-if __name__ == "__main__":
-    check_git()
+
+def parse_train_args(argv=None):
     supported_resolutions = aspects.get_supported_resolutions()
     argparser = argparse.ArgumentParser(description="EveryDream2 Training options")
     argparser.add_argument("--config", type=str, required=False, default=None, help="JSON config file to load options from")
@@ -1450,7 +1450,15 @@ if __name__ == "__main__":
     argparser.add_argument("--ema_resume_model", type=str, default=None, help="The EMA decay checkpoint to resume from for EMA decay, either a local .ckpt file, a converted Diffusers format folder, or a Huggingface.co repo id such as stabilityai/stable-diffusion-2-1-ema-decay")
     argparser.add_argument("--pyramid_noise_discount", type=float, default=None, help="Enables pyramid noise and use specified discount factor for it")
 
-    # load CLI args to overwrite existing config args
-    args = argparser.parse_args(args=argv, namespace=args)
+    args = argparser.parse_args(
+        args=remaining_argv,
+        namespace=args,
+    )
 
+    return args
+
+
+if __name__ == "__main__":
+    check_git()
+    args = parse_train_args()
     main(args)
