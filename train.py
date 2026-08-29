@@ -101,9 +101,10 @@ def convert_to_hf(ckpt_path):
             try:
                 import utils.convert_original_stable_diffusion_to_diffusers as convert
                 convert.convert(ckpt_path, f"ckpt_cache/{ckpt_path}")
-            except:
-                logging.info("Please manually convert the checkpoint to Diffusers format (one time setup), see readme.")
-                exit()
+            except Exception as e:
+                raise RuntimeError(
+                    f"Failed to convert checkpoint to Diffusers format: {ckpt_path}"
+                ) from e
         else:
             logging.info(f"Found cached checkpoint at {hf_cache}")
 
