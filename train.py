@@ -863,12 +863,12 @@ def main(args):
 
     """
     Train the model
-
     """
-    print(f" {Fore.LIGHTGREEN_EX}** Welcome to EveryDream trainer 2.0!**{Style.RESET_ALL}")
-    print(f" (C) 2022-2023 Victor C Hall  This program is licensed under AGPL 3.0 https://www.gnu.org/licenses/agpl-3.0.en.html")
-    print()
-    print("** Trainer Starting **")
+    if not args.quiet_mode:
+        print(f" {Fore.LIGHTGREEN_EX}** Welcome to EveryDream trainer 2.0!**{Style.RESET_ALL}")
+        print(f" (C) 2022-2023 Victor C Hall  This program is licensed under AGPL 3.0 https://www.gnu.org/licenses/agpl-3.0.en.html")
+        print()
+        print("** Trainer Starting **")
 
     global interrupted
     interrupted = False
