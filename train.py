@@ -933,8 +933,8 @@ def main(args):
     epoch_pbar = tqdm(
         range(args.max_epochs), 
         position=0, 
-        leave=True, 
-        dynamic_ncols=True,
+        leave=True,
+        #dynamic_ncols=True,
         disable=args.max_epochs <= 1,
     )
     epoch_pbar.set_description(f"{Fore.LIGHTCYAN_EX}Epochs{Style.RESET_ALL}")
@@ -1197,7 +1197,12 @@ def main(args):
             epoch_start_time = time.time()
             images_per_sec_log_step = []
 
-            steps_pbar = tqdm(range(epoch_len), position=1, leave=False, dynamic_ncols=True)
+            steps_pbar = tqdm(
+                range(epoch_len), 
+                position=1, 
+                leave=False, 
+                #dynamic_ncols=True
+            )
             steps_pbar.set_description(f"{Fore.LIGHTCYAN_EX}Steps{Style.RESET_ALL}")
 
             validation_steps = (
