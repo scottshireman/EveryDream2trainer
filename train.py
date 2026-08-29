@@ -467,7 +467,9 @@ def write_batch_schedule(log_folder: str, train_batch: EveryDreamBatch, epoch: i
                 item = train_batch.image_train_items[i]
                 f.write(f"step:{int(i / train_batch.batch_size):05}, wh:{item.target_wh}, r:{item.runt_size}, path:{item.pathname}\n")
             except Exception as e:
-                logging.error(f" * Error writing to batch schedule for file path: {item.pathname}")
+                logging.error(
+                    f" * Error writing batch schedule for {item.pathname}: {e}"
+                )
 
 
 def read_sample_prompts(sample_prompts_file_path: str):
