@@ -237,6 +237,7 @@ def setup_local_logger(args):
                         level=logging.INFO,
                         format="%(asctime)s %(message)s",
                         datefmt="%m/%d/%Y %I:%M:%S %p",
+                        force=True,
                        )
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setLevel(logging.WARNING)  # Added on 3/15 to suppress info messages to console
