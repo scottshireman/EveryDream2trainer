@@ -42,19 +42,21 @@ class EveryDreamOptimizer():
     text_encoder: text encoder model parameters
     unet: unet model parameters
     """
-    def __init__(self, args, optimizer_config, text_encoder, unet, epoch_len, log_writer=None):
+    def __init__(self, args, optimizer_config, text_encoder, unet, epoch_len, log_writer=None, quiet_mode=False):
         del optimizer_config["doc"]
-        print(f"\n raw optimizer_config:")
-        pprint.pprint(optimizer_config)
+        if not quiet_mode:
+            print(f"\n raw optimizer_config:")
+            pprint.pprint(optimizer_config)
         self.epoch_len = epoch_len
         self.unet = unet # needed for weight norm logging, unet.parameters() has to be called again, Diffusers quirk
         self.log_writer = log_writer
         self.te_config, self.base_config = self.get_final_optimizer_configs(args, optimizer_config)
         self.te_freeze_config = optimizer_config.get("text_encoder_freezing", {})
-        print(f" Final unet optimizer config:")
-        pprint.pprint(self.base_config)
-        print(f" Final text encoder optimizer config:")
-        pprint.pprint(self.te_config)
+        if not quiet_mode:
+            print(f" Final unet optimizer config:")
+            pprint.pprint(self.base_config)
+            print(f" Final text encoder optimizer config:")
+            pprint.pprint(self.te_config)
 
         self.grad_accum = args.grad_accum
         self.clip_grad_norm = args.clip_grad_norm
