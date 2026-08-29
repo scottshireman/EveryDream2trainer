@@ -570,6 +570,7 @@ def main(args):
 
     log_time, log_folder = setup_local_logger(args)
     args = setup_args(args)
+    print(args.quiet_mode)
     if not args.quiet_mode:
         print(f" Args:")
         pprint.pprint(vars(args))
