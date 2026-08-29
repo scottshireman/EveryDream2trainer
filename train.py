@@ -930,7 +930,13 @@ def main(args):
     logging.info(f" {Fore.GREEN}batch_size: {Style.RESET_ALL}{Fore.LIGHTGREEN_EX}{args.batch_size}{Style.RESET_ALL}")
     logging.info(f" {Fore.GREEN}epoch_len: {Fore.LIGHTGREEN_EX}{epoch_len}{Style.RESET_ALL}")
 
-    epoch_pbar = tqdm(range(args.max_epochs), position=0, leave=True, dynamic_ncols=True)
+    epoch_pbar = tqdm(
+        range(args.max_epochs), 
+        position=0, 
+        leave=True, 
+        dynamic_ncols=True,
+        disable=args.max_epochs <= 1,
+    )
     epoch_pbar.set_description(f"{Fore.LIGHTCYAN_EX}Epochs{Style.RESET_ALL}")
     epoch_times = []
 
