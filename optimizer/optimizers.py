@@ -147,6 +147,14 @@ class EveryDreamOptimizer():
                 self.scaler.step(optimizer)
 
             self.scaler.update()
+
+            """
+            Moved here on 8/29/2026 based on chatgpt recomendation to correct this error:
+            /workspace/EveryDream2trainer/optimizer/optimizers.py:160: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate scheduler.step()
+            """
+            for scheduler in self.lr_schedulers:
+                scheduler.step()
+                
             if self.log_grad_norm and self.log_writer:
                 log_info_unet_fn = lambda n, label: self.log_writer.add_scalar(label, n, global_step)
                 log_info_te_fn = lambda n, label: self.log_writer.add_scalar(label, n, global_step)
@@ -156,8 +164,9 @@ class EveryDreamOptimizer():
 
             self._zero_grad(set_to_none=True)
 
-        for scheduler in self.lr_schedulers:
-            scheduler.step()
+        # Moved up inside the loop above (line 152 right now) on 8/29/2026 based on chatgpt recomendation to correct this error:
+        #for scheduler in self.lr_schedulers:
+        #    scheduler.step()
 
         if self.apply_grad_scaler_step_tweaks:
             self._update_grad_scaler(global_step)
