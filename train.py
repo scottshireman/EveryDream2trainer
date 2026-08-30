@@ -1214,7 +1214,7 @@ def main(args):
             steps_pbar = tqdm(
                 range(epoch_len), 
                 position=1, 
-                leave=False, 
+                leave=True, 
                 #dynamic_ncols=True
             )
             steps_pbar.set_description(f"{Fore.LIGHTCYAN_EX}Steps{Style.RESET_ALL}")
