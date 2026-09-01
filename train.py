@@ -1213,7 +1213,7 @@ def main(args):
 
             steps_pbar = tqdm(
                 range(epoch_len), 
-                position=1, 
+                #position=1, 
                 leave=True, 
                 #dynamic_ncols=True
             )
@@ -1334,7 +1334,7 @@ def main(args):
                 global_step += 1
                 # end of step
 
-            steps_pbar.close()
+            steps_pbar.refresh()
 
             elapsed_epoch_time = (time.time() - epoch_start_time) / 60
             epoch_times.append(dict(epoch=epoch, time=elapsed_epoch_time))
