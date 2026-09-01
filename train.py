@@ -946,7 +946,7 @@ def main(args):
 
     epoch_pbar = tqdm(
         range(args.max_epochs), 
-        position=0, 
+        #position=0, 
         leave=True,
         #dynamic_ncols=True,
         disable=args.max_epochs <= 1,
